@@ -6,9 +6,6 @@ coverage
 *.tsbuildinfo
 
 .env*
-!.env.example
-!.env.preview.example
-!.env.production.example
 
 .DS_Store
 npm-debug.log*
