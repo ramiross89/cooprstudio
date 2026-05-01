@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "CooprStudio",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://cooprstudio.com",
   description:
-    "CooprStudio diseña, desarrolla y lanza páginas web modernas con SEO, soporte y mantenimiento continuo.",
+    "CooprStudio diseña, desarrolla y lanza sitios web modernos con SEO inicial, soporte y mantenimiento continuo para negocios que quieren crecer.",
   locale: "es_MX",
   email: "cooprstudio@gmail.com",
   keywords: [

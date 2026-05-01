@@ -9,7 +9,7 @@ export const navItems = [
 export const heroSlides: HeroSlide[] = [
   {
     eyebrow: "Diseño + desarrollo desde cero",
-    headline: "Creamos páginas web listas para vender, medir y crecer.",
+    headline: "Sitios web modernos que muestran lo mejor de tu negocio.",
     subheadline:
       "CooprStudio combina estrategia, interfaz y desarrollo Next.js para lanzar experiencias web rápidas, elegantes y fáciles de evolucionar.",
     primaryCta: { label: "Agendar diagnóstico", href: "#contacto" },
@@ -17,7 +17,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     eyebrow: "Lanzamiento web + SEO",
-    headline: "Tu sitio sale con base técnica, contenido claro y SEO inicial.",
+    headline: "Lanzamos tu sitio para crecer en Google.",
     subheadline:
       "Cuidamos estructura semántica, performance, metadata, conversión y analítica para que el lanzamiento no solo se vea bien: también sea accionable.",
     primaryCta: { label: "Planear lanzamiento", href: "#contacto" },
@@ -25,7 +25,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     eyebrow: "Soporte continuo",
-    headline: "Después del go-live seguimos optimizando contigo.",
+    headline: "Cuando tu sitio está en línea, seguimos contigo.",
     subheadline:
       "Mantenimiento, mejoras iterativas, monitoreo y soporte para que tu presencia digital no se quede quieta después de publicar.",
     primaryCta: { label: "Solicitar soporte", href: "#contacto" },
