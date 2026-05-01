@@ -44,22 +44,27 @@ npm run build
 
 ## Variables de ambiente
 
-Copia el archivo correspondiente al entorno que necesites:
-
-```bash
-cp .env.example .env.local
-cp .env.preview.example .env.preview
-cp .env.production.example .env.production
-```
-
 Variables disponibles:
 
 - `NEXT_PUBLIC_SITE_URL`: URL pública usada para metadata, canonical y Open Graph.
+- `NEXT_PUBLIC_GA_ID`: Measurement ID de Google Analytics 4, por ejemplo `G-XXXXXXXXXX`.
+- `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`: token de verificación de Google Search Console.
 - `RESEND_API_KEY`: API key de Resend para enviar correos desde la API route.
 - `LEADS_EMAIL_TO`: destinatario de los leads. Por defecto: `cooprstudio@gmail.com`.
 - `LEADS_EMAIL_FROM`: remitente verificado en Resend. En producción usa un dominio verificado, por ejemplo `CooprStudio <hola@cooprstudio.com>`.
 
-En Vercel, configura `NEXT_PUBLIC_SITE_URL`, `RESEND_API_KEY`, `LEADS_EMAIL_TO` y `LEADS_EMAIL_FROM` por ambiente: Preview y Production.
+En Vercel, configura estas variables por ambiente: Preview y Production.
+
+```env
+NEXT_PUBLIC_SITE_URL=https://cooprstudio.com
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
+RESEND_API_KEY=
+LEADS_EMAIL_TO=cooprstudio@gmail.com
+LEADS_EMAIL_FROM=CooprStudio <onboarding@resend.dev>
+```
+
+Para producción, cambia `LEADS_EMAIL_FROM` a un remitente con dominio propio solo después de verificar el dominio en Resend.
 
 ## CI/CD
 
@@ -81,5 +86,5 @@ El workflow `.github/workflows/ci.yml` ejecuta:
 
 - El formulario valida en cliente con Zod y también en la API route.
 - El envío del formulario solo responde como exitoso si Resend acepta el correo del lead.
-- La landing usa metadata completa, Open Graph, Twitter Card, canonical y estructura semántica.
+- La landing usa metadata completa, Open Graph, Twitter Card, canonical, JSON-LD, `robots.txt`, `sitemap.xml` e integración opcional con Google Analytics 4.
 - Los fondos del carrusel se generan localmente con `npm run assets:generate` y viven en `public/images`.

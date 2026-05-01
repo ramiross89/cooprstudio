@@ -1,39 +1,36 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cooprstudio.com";
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
   title: {
     default: "CooprStudio | Diseño y desarrollo web desde cero",
     template: "%s | CooprStudio",
   },
-  description:
-    "CooprStudio diseña, desarrolla y lanza páginas web modernas con SEO, soporte y mantenimiento continuo.",
-  keywords: [
-    "diseño web",
-    "desarrollo web",
-    "landing pages",
-    "SEO",
-    "Next.js",
-    "Vercel",
-    "mantenimiento web",
-  ],
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
   authors: [{ name: "CooprStudio" }],
   creator: "CooprStudio",
   publisher: "CooprStudio",
+  category: "technology",
   alternates: {
     canonical: "/",
+    languages: {
+      "es-MX": "/",
+    },
   },
   openGraph: {
     type: "website",
-    locale: "es_MX",
+    locale: siteConfig.locale,
     url: "/",
     title: "CooprStudio | Diseño y desarrollo web desde cero",
-    description:
-      "Landing, sitios y experiencias web construidas desde cero con lanzamiento, SEO y soporte continuo.",
-    siteName: "CooprStudio",
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
         url: "/images/hero-build.png",
@@ -46,13 +43,31 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "CooprStudio | Diseño y desarrollo web desde cero",
-    description:
-      "Diseño, desarrollo, lanzamiento SEO y mantenimiento continuo para marcas que necesitan crecer en web.",
+    description: siteConfig.description,
     images: ["/images/hero-build.png"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  other: {
+    "theme-color": "#1f7a68",
+    "og:email": siteConfig.email,
+    "og:url": absoluteUrl("/"),
   },
 };
 
@@ -64,6 +79,7 @@ export default function RootLayout({
   return (
     <html lang="es-MX">
       <body>{children}</body>
+      {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }
