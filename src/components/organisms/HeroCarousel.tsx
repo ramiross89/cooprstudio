@@ -10,14 +10,19 @@ type HeroCarouselProps = {
 
 export function HeroCarousel({ slides }: HeroCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused || slides.length <= 1) {
+      return undefined;
+    }
+
     const interval = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % slides.length);
     }, 6500);
 
     return () => window.clearInterval(interval);
-  }, [slides.length]);
+  }, [isPaused, slides.length]);
 
   const goToPrevious = () => {
     setActiveIndex((current) => (current === 0 ? slides.length - 1 : current - 1));
@@ -27,13 +32,19 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
     setActiveIndex((current) => (current + 1) % slides.length);
   };
 
+  const togglePaused = () => {
+    setIsPaused((current) => !current);
+  };
+
   return (
     <GlowyWavesHero
       slides={slides}
       activeIndex={activeIndex}
+      isPaused={isPaused}
       onPrevious={goToPrevious}
       onNext={goToNext}
       onSelectSlide={setActiveIndex}
+      onTogglePaused={togglePaused}
     />
   );
 }

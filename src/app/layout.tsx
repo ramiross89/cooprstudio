@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Manrope } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -10,12 +10,17 @@ const manrope = Manrope({
   variable: "--font-manrope",
   display: "swap",
 });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
   title: {
-    default: "CooprStudio | Diseño y desarrollo web desde cero",
+    default: "CooprStudio | Sitios web modernos desde cero",
     template: "%s | CooprStudio",
   },
   description: siteConfig.description,
@@ -34,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: siteConfig.locale,
     url: "/",
-    title: "CooprStudio | Diseño y desarrollo web desde cero",
+    title: "CooprStudio | Sitios web modernos desde cero",
     description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
@@ -42,13 +47,13 @@ export const metadata: Metadata = {
         url: "/images/hero-build.png",
         width: 1600,
         height: 900,
-        alt: "Interfaz web moderna creada por CooprStudio",
+        alt: "Sitio web moderno creado por CooprStudio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CooprStudio | Diseño y desarrollo web desde cero",
+    title: "CooprStudio | Sitios web modernos desde cero",
     description: siteConfig.description,
     images: ["/images/hero-build.png"],
   },
@@ -83,7 +88,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es-MX" className={manrope.variable}>
+    <html lang="es-MX" className={`${manrope.variable} ${inter.variable}`}>
       <body>{children}</body>
       {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>

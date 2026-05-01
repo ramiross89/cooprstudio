@@ -92,19 +92,20 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contacto" className="bg-ink py-20 text-white sm:py-28">
+    <section id="contacto" className="scroll-mt-24 bg-ink py-16 text-white sm:py-28">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="grid gap-10 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <ScrollReveal>
             <SectionHeading
               eyebrow="Contacto"
               title="Cuéntanos qué quieres construir."
-              description="Respondemos con una primera lectura del proyecto, alcance sugerido y siguientes pasos para llevarlo a producción."
+              description="Compártenos tu idea y te responderemos con una primera orientación sobre el alcance, los pasos recomendados y la mejor forma de avanzar."
               tone="dark"
             />
             <div className="mt-8 rounded-[8px] border border-white/12 bg-white/7 p-5 text-sm leading-7 text-white/76">
-              Ideal para marcas que necesitan una web nueva, una landing de
-              campaña o una base técnica más robusta para crecer.
+              Ideal para negocios que necesitan un sitio web nuevo, una landing
+              para campaña, una renovación de su página actual o una presencia
+              digital más profesional.
             </div>
           </ScrollReveal>
 
@@ -135,7 +136,7 @@ export function ContactForm() {
                 />
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
                 <Field label="Nombre" error={errors.name?.message}>
                   <Input
                     placeholder="Tu nombre"
@@ -155,17 +156,17 @@ export function ContactForm() {
                 </Field>
               </div>
 
-              <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                <Field label="Empresa ó Negocio">
+              <div className="mt-4 grid gap-4 sm:mt-5 sm:grid-cols-2 sm:gap-5">
+                <Field label="Empresa o negocio">
                   <Input
-                    placeholder="Nombre de empresa"
+                    placeholder="Nombre de tu empresa o negocio"
                     autoComplete="organization"
                     {...register("company")}
                   />
                 </Field>
                 <Field label="Servicio" error={errors.service?.message}>
                   <select
-                    className="min-h-12 w-full rounded-2xl border border-line bg-surface px-4 text-sm text-foreground outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/15"
+                    className="min-h-12 w-full rounded-[16px] border border-line px-4 text-sm text-foreground outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/15"
                     {...register("service")}
                   >
                     <option>Diseño y desarrollo web desde cero</option>
@@ -175,18 +176,22 @@ export function ContactForm() {
                 </Field>
               </div>
 
-              <div className="mt-5">
+              <div className="mt-4 sm:mt-5">
                 <Field label="Mensaje" error={errors.message?.message}>
                   <Textarea
-                    placeholder="Cuéntanos sobre el proyecto, fechas, objetivos y cualquier referencia importante."
+                    placeholder="Cuéntanos sobre tu proyecto, fechas, objetivos y cualquier referencia importante."
                     hasError={Boolean(errors.message)}
                     {...register("message")}
                   />
                 </Field>
               </div>
 
-              <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between font-bold">
-                <Button type="submit" disabled={isSubmitting} className="hover:cursor-pointer">
+              <div className="mt-6 flex flex-col gap-4 font-bold sm:flex-row sm:items-center sm:justify-between">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full hover:cursor-pointer sm:w-auto"
+                >
                   {isSubmitting ? (
                     <Loader2 className="animate-spin" aria-hidden="true" size={18} />
                   ) : (

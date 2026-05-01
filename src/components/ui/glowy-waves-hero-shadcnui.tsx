@@ -1,7 +1,14 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Pause,
+  Play,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { Container } from "@/components/atoms/Container";
@@ -25,9 +32,11 @@ interface WaveConfig {
 type GlowyWavesHeroProps = {
   slides: HeroSlide[];
   activeIndex: number;
+  isPaused: boolean;
   onPrevious: () => void;
   onNext: () => void;
   onSelectSlide: (index: number) => void;
+  onTogglePaused: () => void;
 };
 
 const containerVariants: Variants = {
@@ -51,13 +60,16 @@ const itemVariants: Variants = {
 export function GlowyWavesHero({
   slides,
   activeIndex,
+  isPaused,
   onPrevious,
   onNext,
   onSelectSlide,
+  onTogglePaused,
 }: GlowyWavesHeroProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef<Point>({ x: 0, y: 0 });
   const targetMouseRef = useRef<Point>({ x: 0, y: 0 });
+  const touchStartRef = useRef<Point | null>(null);
   const activeSlide = slides[activeIndex];
 
   useEffect(() => {
@@ -270,11 +282,59 @@ export function GlowyWavesHero({
     };
   }, []);
 
+  const isMobileTouch = () =>
+    typeof window !== "undefined" &&
+    (window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches);
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLElement>) => {
+    if (!isMobileTouch()) {
+      return;
+    }
+
+    const touch = event.touches.item(0);
+
+    if (!touch) {
+      return;
+    }
+
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLElement>) => {
+    if (!touchStartRef.current || !isMobileTouch()) {
+      touchStartRef.current = null;
+      return;
+    }
+
+    const touch = event.changedTouches.item(0);
+
+    if (!touch) {
+      touchStartRef.current = null;
+      return;
+    }
+
+    const deltaX = touch.clientX - touchStartRef.current.x;
+    const deltaY = touch.clientY - touchStartRef.current.y;
+    const isHorizontalSwipe = Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
+
+    if (isHorizontalSwipe) {
+      if (deltaX < 0) {
+        onNext();
+      } else {
+        onPrevious();
+      }
+    }
+
+    touchStartRef.current = null;
+  };
+
   return (
     <section
-      className="relative isolate min-h-[calc(100svh-72px)] overflow-hidden bg-background text-white"
+      className="relative isolate min-h-svh overflow-hidden bg-background text-white"
       role="region"
       aria-label="Presentación principal"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <canvas
         ref={canvasRef}
@@ -290,7 +350,7 @@ export function GlowyWavesHero({
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.08),transparent_24%),linear-gradient(180deg,rgba(8,9,11,0.22),rgba(8,9,11,0.72))]" />
       <div className="noise-overlay absolute inset-0 opacity-20" />
 
-      <Container className="relative z-10 flex min-h-[calc(100svh-72px)] items-center py-16">
+      <Container className="relative z-10 flex min-h-svh items-center pb-32 pt-28 sm:py-16">
         <motion.div
           key={activeSlide.headline}
           variants={containerVariants}
@@ -300,7 +360,7 @@ export function GlowyWavesHero({
         >
           <motion.p
             variants={itemVariants}
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-background/60 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-white/82 backdrop-blur-md"
+            className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-background/60 px-3 py-2 text-[0.68rem] font-extrabold uppercase leading-5 tracking-[0.14em] text-white/82 backdrop-blur-md sm:px-4 sm:text-xs sm:tracking-[0.18em]"
           >
             <Sparkles className="h-4 w-4 text-brand" aria-hidden="true" />
             {activeSlide.eyebrow}
@@ -308,23 +368,23 @@ export function GlowyWavesHero({
 
           <motion.h1
             variants={itemVariants}
-            className="mt-7 max-w-4xl text-[2.75rem] font-extrabold leading-[1] tracking-[-0.045em] text-white sm:text-[4.25rem] lg:text-[4.6rem]"
+            className="mt-6 max-w-4xl text-[2.35rem] font-extrabold leading-[1.03] tracking-[-0.04em] text-white sm:mt-7 sm:text-[4.25rem] sm:leading-[1] sm:tracking-[-0.045em] lg:text-[4.6rem]"
           >
             {activeSlide.headline}
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mt-6 max-w-2xl text-base leading-8 text-white/72 sm:text-xl"
+            className="mt-5 max-w-2xl text-[0.98rem] leading-7 text-white/72 sm:mt-6 sm:text-xl sm:leading-8"
           >
             {activeSlide.subheadline}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
+            className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row"
           >
-            <Button asChild size="lg" className="group">
+            <Button asChild size="lg" className="group w-full sm:w-auto">
               <Link href={activeSlide.primaryCta.href}>
                 {activeSlide.primaryCta.label}
                 <ArrowRight
@@ -333,7 +393,7 @@ export function GlowyWavesHero({
                 />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <Link href={activeSlide.secondaryCta.href}>
                 {activeSlide.secondaryCta.label}
               </Link>
@@ -343,7 +403,7 @@ export function GlowyWavesHero({
       </Container>
 
       <div className="absolute bottom-6 left-0 right-0 z-10">
-        <Container className="flex items-center justify-between gap-5">
+        <Container className="flex items-center justify-between gap-4">
           <div className="flex gap-2" aria-label="Slides">
             {slides.map((slide, index) => (
               <button
@@ -358,22 +418,35 @@ export function GlowyWavesHero({
               />
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 sm:gap-2">
+            <button
+              type="button"
+              aria-label={isPaused ? "Reanudar slider" : "Pausar slider"}
+              aria-pressed={isPaused}
+              className="grid size-8 place-items-center rounded-full border border-white/22 bg-white/12 text-white backdrop-blur-md transition hover:bg-white/22 sm:size-9"
+              onClick={onTogglePaused}
+            >
+              {isPaused ? (
+                <Play aria-hidden="true" size={15} />
+              ) : (
+                <Pause aria-hidden="true" size={15} />
+              )}
+            </button>
             <button
               type="button"
               aria-label="Slide anterior"
-              className="grid size-11 place-items-center rounded-full border border-white/22 bg-white/12 text-white backdrop-blur-md transition hover:bg-white/22"
+              className="grid size-8 place-items-center rounded-full border border-white/22 bg-white/12 text-white backdrop-blur-md transition hover:bg-white/22 sm:size-9"
               onClick={onPrevious}
             >
-              <ChevronLeft aria-hidden="true" size={20} />
+              <ChevronLeft aria-hidden="true" size={17} />
             </button>
             <button
               type="button"
               aria-label="Slide siguiente"
-              className="grid size-11 place-items-center rounded-full border border-white/22 bg-white/12 text-white backdrop-blur-md transition hover:bg-white/22"
+              className="grid size-8 place-items-center rounded-full border border-white/22 bg-white/12 text-white backdrop-blur-md transition hover:bg-white/22 sm:size-9"
               onClick={onNext}
             >
-              <ChevronRight aria-hidden="true" size={20} />
+              <ChevronRight aria-hidden="true" size={17} />
             </button>
           </div>
         </Container>

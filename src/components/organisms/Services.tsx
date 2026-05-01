@@ -13,16 +13,16 @@ const icons = {
 
 export function Services() {
   return (
-    <section id="servicios" className="bg-background py-20 sm:py-28">
+    <section id="servicios" className="scroll-mt-24 bg-background py-16 sm:py-28">
       <Container>
         <ScrollReveal>
           <SectionHeading
             eyebrow="Servicios"
-            title="Todo lo necesario para lanzar una presencia web seria."
-            description="Trabajamos desde la idea inicial hasta el seguimiento post-lanzamiento, con una base técnica preparada para crecer."
+            title="Todo lo que necesitas para lanzar un sitio web moderno."
+            description="Tenemos más de 10 años de experiencia ayudando a marcas, negocios y emprendedores a crear sitios web claros, modernos y preparados para crecer."
           />
         </ScrollReveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
           {services.map((service, index) => (
             <ScrollReveal key={service.title} delay={index * 120}>
               <ServiceCard

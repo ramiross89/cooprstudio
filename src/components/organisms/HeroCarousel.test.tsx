@@ -9,7 +9,7 @@ describe("HeroCarousel", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: /creamos páginas web listas para vender/i,
+        name: /sitios web modernos que muestran lo mejor/i,
       }),
     ).toBeInTheDocument();
 
@@ -17,7 +17,7 @@ describe("HeroCarousel", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: /tu sitio sale con base técnica/i,
+        name: /lanzamos tu sitio para crecer en google/i,
       }),
     ).toBeInTheDocument();
   });

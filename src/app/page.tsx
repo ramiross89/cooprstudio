@@ -35,7 +35,7 @@ export default function Home() {
         serviceType: [
           "Diseño y desarrollo web desde cero",
           "Lanzamiento web y SEO",
-          "Soporte y mantenimiento web",
+          "Seguimiento, soporte y mantenimiento",
         ],
       },
     ],
