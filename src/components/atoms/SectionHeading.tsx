@@ -25,15 +25,16 @@ export function SectionHeading({
       </p>
       <h2
         className={cn(
-          "mt-4 text-[2.15rem] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[2.85rem] lg:text-[3.5rem]",
+          "mt-4 text-[1.95rem] font-extrabold leading-[1.08] tracking-[-0.02em] sm:text-[2.85rem] sm:leading-[1.05] lg:text-[3.5rem]",
           tone === "dark" ? "text-white" : "text-foreground",
         )}
       >
         {title}
       </h2>
+      <div className="mt-5 h-1 w-24 rounded-full bg-accent sm:mt-6" aria-hidden="true" />
       <p
         className={cn(
-          "mt-5 text-base leading-8 sm:text-lg",
+          "mt-5 text-base leading-7 sm:mt-6 sm:text-lg sm:leading-8",
           tone === "dark" ? "text-white/74" : "text-muted",
         )}
       >

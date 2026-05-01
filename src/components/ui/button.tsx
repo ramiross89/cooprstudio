@@ -26,7 +26,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 
 const sizeClasses: Record<ButtonSize, string> = {
   default: "min-h-11 px-5 text-sm",
-  lg: "min-h-12 px-6 text-sm",
+  lg: "min-h-12 px-5 text-sm sm:px-6",
 };
 
 export function Button({
@@ -39,7 +39,7 @@ export function Button({
   ...props
 }: UiButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-[8px] font-bold tracking-[-0.01em] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-0 disabled:pointer-events-none disabled:opacity-60",
+    "inline-flex items-center justify-center gap-2 rounded-full font-bold tracking-[-0.01em] transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-0 disabled:pointer-events-none disabled:opacity-60",
     variantClasses[variant],
     sizeClasses[size],
     className,

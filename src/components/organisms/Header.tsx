@@ -24,12 +24,12 @@ export function Header() {
   }, []);
 
   return (
-    <header className="pointer-events-none sticky top-[calc(var(--spacing)*4)] z-50 px-4 pt-4 transition-shadow duration-300">
+    <header className="pointer-events-none fixed inset-x-0 top-[calc(var(--spacing)*3)] z-50 px-3 transition-shadow duration-300 sm:top-[calc(var(--spacing)*4)] sm:px-4">
       <Container
         className={cn(
-          "pointer-events-auto flex min-h-16 max-w-5xl items-center justify-between gap-4 rounded-[32px] bg-zinc-900/40 backdrop-blur-md border border-zinc-800 transition-all duration-300 sm:px-5 lg:px-6",
+          "pointer-events-auto flex min-h-14 max-w-5xl items-center justify-between gap-3 rounded-[28px] border border-zinc-800 bg-zinc-900/40 px-3 shadow-none backdrop-blur-md transition-[border-color,box-shadow,background-color] duration-500 ease-out sm:min-h-16 sm:gap-4 sm:rounded-[32px] sm:px-5 lg:px-6",
           isScrolled
-            ? "border-white/18"
+            ? "border-white/18 shadow-[0_22px_70px_rgba(0,0,0,0.38)]"
             : "border-white/12",
         )}
       >
@@ -52,7 +52,7 @@ export function Header() {
         </div>
         <button
           type="button"
-          className="grid size-11 place-items-center rounded-full border border-line bg-surface text-foreground md:hidden"
+          className="grid size-10 shrink-0 place-items-center rounded-full border border-line bg-surface text-foreground md:hidden"
           aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={isOpen}
           onClick={() => setIsOpen((value) => !value)}
@@ -62,8 +62,8 @@ export function Header() {
       </Container>
 
       {isOpen ? (
-        <div className="pointer-events-auto mx-auto mt-3 w-full max-w-5xl overflow-hidden rounded-[28px] border border-white/14 bg-ink/78 shadow-[0_22px_70px_rgba(0,0,0,0.36)] backdrop-blur-2xl md:hidden">
-          <Container className="grid max-w-5xl gap-3 px-4 py-4">
+        <div className="pointer-events-auto mx-auto mt-3 w-full max-w-5xl overflow-hidden rounded-[24px] border border-white/14 bg-ink/78 shadow-[0_22px_70px_rgba(0,0,0,0.36)] backdrop-blur-2xl md:hidden">
+          <Container className="grid max-w-5xl gap-2 px-3 py-3">
             {navItems.map((item) => (
               <a
                 key={item.href}
