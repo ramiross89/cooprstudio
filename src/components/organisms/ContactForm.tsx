@@ -117,7 +117,7 @@ export function ContactForm() {
             </div>
 
             <div className="mt-5 grid gap-5 sm:grid-cols-2">
-              <Field label="Empresa">
+              <Field label="Empresa ó Negocio">
                 <Input
                   placeholder="Nombre de empresa"
                   autoComplete="organization"
