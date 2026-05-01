@@ -14,7 +14,6 @@ export const heroSlides: HeroSlide[] = [
       "CooprStudio combina estrategia, interfaz y desarrollo Next.js para lanzar experiencias web rápidas, elegantes y fáciles de evolucionar.",
     primaryCta: { label: "Agendar diagnóstico", href: "#contacto" },
     secondaryCta: { label: "Ver servicios", href: "#servicios" },
-    image: "/images/hero-build.png",
   },
   {
     eyebrow: "Lanzamiento web + SEO",
@@ -23,16 +22,14 @@ export const heroSlides: HeroSlide[] = [
       "Cuidamos estructura semántica, performance, metadata, conversión y analítica para que el lanzamiento no solo se vea bien: también sea accionable.",
     primaryCta: { label: "Planear lanzamiento", href: "#contacto" },
     secondaryCta: { label: "Nuestro proceso", href: "#proceso" },
-    image: "/images/hero-launch.png",
   },
   {
     eyebrow: "Soporte continuo",
-    headline: "Despues del go-live seguimos optimizando contigo.",
+    headline: "Después del go-live seguimos optimizando contigo.",
     subheadline:
       "Mantenimiento, mejoras iterativas, monitoreo y soporte para que tu presencia digital no se quede quieta después de publicar.",
     primaryCta: { label: "Solicitar soporte", href: "#contacto" },
     secondaryCta: { label: "Explorar servicios", href: "#servicios" },
-    image: "/images/hero-support.png",
   },
 ];
 
@@ -40,13 +37,13 @@ export const services: Service[] = [
   {
     title: "Diseño y desarrollo web desde cero",
     description:
-      "Arquitectura, UI responsive, componentes reutilizables y desarrollo con Next.js, React, TypeScript y Tailwind CSS.",
+      "Creamos una página clara, atractiva y fácil de navegar para que tu negocio se vea profesional desde el primer clic.",
     icon: "layers",
   },
   {
     title: "Lanzamiento web y SEO",
     description:
-      "Preparación de metadata, Open Graph, estructura semántica, optimización técnica y despliegue en Vercel.",
+      "Preparamos tu sitio para salir al mundo con una presencia sólida y mejores oportunidades de aparecer cuando tus clientes te buscan.",
     icon: "rocket",
   },
   {
@@ -72,7 +69,7 @@ export const processSteps: ProcessStep[] = [
   },
   {
     step: "03",
-    title: "Construccion",
+    title: "Construcción",
     description:
       "Desarrollamos la experiencia en Next.js con código tipado, responsive y preparado para Vercel.",
   },

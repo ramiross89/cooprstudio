@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Manrope } from "next/font/google";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -65,7 +71,7 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   other: {
-    "theme-color": "#1f7a68",
+    "theme-color": "#0b0c0f",
     "og:email": siteConfig.email,
     "og:url": absoluteUrl("/"),
   },
@@ -77,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es-MX">
+    <html lang="es-MX" className={manrope.variable}>
       <body>{children}</body>
       {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
