@@ -9,7 +9,6 @@ export type HeroSlide = {
   subheadline: string;
   primaryCta: Cta;
   secondaryCta: Cta;
-  image: string;
 };
 
 export type Service = {

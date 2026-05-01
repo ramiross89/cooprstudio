@@ -17,7 +17,7 @@ export function SectionHeading({
     <div className="max-w-3xl">
       <p
         className={cn(
-          "text-sm font-bold uppercase tracking-[0.18em]",
+          "text-xs font-extrabold uppercase tracking-[0.18em] sm:text-sm",
           tone === "dark" ? "text-accent" : "text-brand",
         )}
       >
@@ -25,7 +25,7 @@ export function SectionHeading({
       </p>
       <h2
         className={cn(
-          "mt-4 text-3xl font-black tracking-normal sm:text-4xl lg:text-5xl",
+          "mt-4 text-[2.15rem] font-extrabold leading-[1.05] tracking-[-0.02em] sm:text-[2.85rem] lg:text-[3.5rem]",
           tone === "dark" ? "text-white" : "text-foreground",
         )}
       >

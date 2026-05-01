@@ -10,7 +10,7 @@ export function Logo() {
         width={960}
         height={320}
         priority
-        className="h-10 w-auto mix-blend-multiply sm:h-11"
+        className="h-10 w-auto sm:h-11"
       />
     </Link>
   );
